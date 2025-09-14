@@ -28,9 +28,14 @@ async def test_project(dut):
 
     # Set the input values you want to test
     for a_bits in range(2**4):
-        a = apy.APyFixed.from_bits(a_bits, int_bits=2, frac_bits=2)
-        for b_bits in range(2**4):
-            b = apy.APyFixed.from_bits(b_bits, int_bits=2, frac_bits=2)
-            dut.ui_in.value = a.to_bits() << 4 and b.to_bits()
+        a = apy.APyFixed(a_bits, int_bits=2, frac_bits=2)
+        for b_bits in range(1, 2**4):
+            b = apy.APyFixed(b_bits, int_bits=2, frac_bits=2)
+            input = a.to_bits() << 4 and b.to_bits()
+            dut.ui_in.value = input
+
+            print(f"a: {repr(a)} ({str(a)})")
+            print(f"b: {repr(b)} ({str(b)})")
+            print(f"input: {input}")
             await ClockCycles(dut.clk, 2)
             assert dut.uo_out.value == (a / b).to_bits()
