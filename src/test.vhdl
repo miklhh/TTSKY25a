@@ -22,9 +22,12 @@ architecture behaviour of test is
 begin
 
     process(clk) begin
-
         if rising_edge(clk) then
-            uo_out <= ui_in;
+            if rst_n = '0' then
+                uo_out <= (others => '0');
+            else
+                uo_out <= ui_in;
+            end if;
         end if;
     end process;
 
