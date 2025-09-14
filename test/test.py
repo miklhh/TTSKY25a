@@ -31,7 +31,7 @@ async def test_project(dut):
         a = apy.APyFixed(a_bits, int_bits=2, frac_bits=2)
         for b_bits in range(1, 2**4):
             b = apy.APyFixed(b_bits, int_bits=2, frac_bits=2)
-            input = a.to_bits() << 4 and b.to_bits()
+            input = a.to_bits() << 4 or b.to_bits()
             dut.ui_in.value = input
 
             print(f"a: {repr(a)} ({str(a)})")
