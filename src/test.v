@@ -1,4 +1,4 @@
-module top_module
+module test
   (input  clk,
    input  rst_n,
    input  ena,

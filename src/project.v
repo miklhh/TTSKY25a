@@ -16,7 +16,7 @@ module tt_um_example (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-    top_module my_top(
+    test my_top(
         .clk(clk),
         .rst_n(rst_n),
         .ena(ena),
