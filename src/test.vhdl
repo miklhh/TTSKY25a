@@ -36,7 +36,7 @@ begin
             if rst_n = '0' then
                 uo_out <= (others => '0');
             else
-                uo_out <= std_logic_vector(num + den);
+                uo_out <= std_logic_vector(num / den);
             end if;
         end if;
     end process;

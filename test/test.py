@@ -31,11 +31,12 @@ async def test_project(dut):
         a = apy.APyFixed(a_bits, int_bits=2, frac_bits=2)
         for b_bits in range(1, 2**4):
             b = apy.APyFixed(b_bits, int_bits=2, frac_bits=2)
-            input = a.to_bits() << 4 or b.to_bits()
-            dut.ui_in.value = input
+            input = (a.to_bits() << 4) + b.to_bits()
 
             print(f"a: {repr(a)} ({str(a)})")
             print(f"b: {repr(b)} ({str(b)})")
-            print(f"input: {input}")
+            print(f"input: {input} ({hex(input):04})")
+
+            dut.ui_in.value = input
             await ClockCycles(dut.clk, 2)
-            assert dut.uo_out.value == (a / b).to_bits()
+            assert dut.uo_out.value == (a / b).cast(int_bits=4, frac_bits=4).to_bits()

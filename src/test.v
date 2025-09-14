@@ -54,7 +54,7 @@ module test
   /* test.vhdl:36:22  */
   assign n16 = ~rst_n;
   /* test.vhdl:39:48  */
-  assign n17 = num + den;
+  assign n17 = $signed(num) / $signed(den); // sdiv
   /* test.vhdl:36:13  */
   assign n19 = n16 ? 8'b00000000 : n17;
   assign n22 = {n3, 4'b0000};
