@@ -21,14 +21,14 @@ module tt_um_example (
         .rst_n(rst_n),
         .ena(ena),
         .ui_in(ui_in),
-        .uo_out(ou_out),
+        .uo_out(uo_out),
         .uio_in(uio_in),
         .uio_out(uio_out),
         .uio_oe(uio_oe)
     );
 
   // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
+  assign uo_out  = ui_in + uio_in;
   assign uio_out = 0;
   assign uio_oe  = 0;
 
