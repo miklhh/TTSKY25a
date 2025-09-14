@@ -17,13 +17,13 @@ module tt_um_example (
 );
 
     top_module my_top(
-        .clk(clk)
-        .rst_n(rst_n)
-        .ena(ena)
-        .ui_in(ui_in)
-        .uo_out(ou_out)
-        .uio_in(uio_in)
-        .uio_out(uio_out)
+        .clk(clk),
+        .rst_n(rst_n),
+        .ena(ena),
+        .ui_in(ui_in),
+        .uo_out(ou_out),
+        .uio_in(uio_in),
+        .uio_out(uio_out),
         .uio_oe(uio_oe)
     );
 
