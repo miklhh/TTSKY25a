@@ -27,17 +27,10 @@ async def test_project(dut):
     dut._log.info("Test a fixed-point two-bit divider")
 
     # Set the input values you want to test
-    a = apy.fx(1.0, int_bits=2, frac_bits=2)
-    b = apy.fx(0.5, int_bits=2, frac_bits=2)
-
-    dut.ui_in.value = a.to_bits() << 4 and b.to_bits()
-
-    # Wait for one clock cycle to see the output values
-    await ClockCycles(dut.clk, 2)
-
-    # The following assersion is just an example of how to check the output values.
-    # Change it to match the actual expected output of your module:
-    assert dut.uo_out.value == apy.fx(2.0, int_bits=4, frac_bits=4)
-
-    # Keep testing the module by changing the input values, waiting for
-    # one or more clock cycles, and asserting the expected output values.
+    for a_bits in range(2**4):
+        a = apy.APyFixed.from_bits(a_bits, int_bits=2, frac_bits=2)
+        for b_bits in range(2**4):
+            b = apy.APyFixed.from_bits(b_bits, int_bits=2, frac_bits=2)
+            dut.ui_in.value = a.to_bits() << 4 and b.to_bits()
+            await ClockCycles(dut.clk, 2)
+            assert dut.uo_out.value == (a / b).to_bits()
